@@ -5,6 +5,7 @@
   "submit": ["OptimusMixedYes1.mp3", "OptimusMixedYes2.mp3", "OptimusMixedYes3.mp3", "OptimusMixedYes4.mp3"],
   "complete": ["OptimusMixedComplete1.mp3", "OptimusMixedComplete2.mp3", "OptimusMixedComplete3.mp3"],
   "error": ["OptimusMixedError1.mp3", "OptimusMixedError2.mp3"],
+  "notification": ["OptimusMixedWhat1.mp3", "OptimusMixedWhat2.mp3", "OptimusMixedWhat3.mp3"],
   "precompact": ["OptimusMixedPrecompact1.mp3"],
   "session_end": ["OptimusMixedSessionEnd1.mp3", "OptimusMixedSessionEnd2.mp3"]
 }

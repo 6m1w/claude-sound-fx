@@ -5,6 +5,7 @@
   "submit": ["TrekBeep1.wav", "TrekBeep5.wav"],
   "complete": ["TrekProgramComplete.wav", "TrekDataTransmitted.wav"],
   "error": ["TrekBeep55.wav"],
+  "notification": ["TrekHail.wav", "TrekAlertUser.wav"],
   "precompact": ["TrekRedAlert.wav"],
   "session_end": []
 }

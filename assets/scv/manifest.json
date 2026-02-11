@@ -5,6 +5,7 @@
   "submit": ["SCVYes1.wav", "SCVYes2.wav", "SCVYes3.wav"],
   "complete": ["SCVComplete1.wav"],
   "error": ["SCVErr1.wav", "SCVErr2.wav", "SCVError1.wav", "SCVError2.wav"],
+  "notification": ["SCVWhat1.wav", "SCVWhat2.wav", "SCVWhat3.wav", "SCVWhat4.wav"],
   "precompact": [],
   "session_end": ["SCVPissed1.wav", "SCVPissed2.wav", "SCVPissed3.wav"]
 }

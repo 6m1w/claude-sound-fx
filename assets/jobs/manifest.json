@@ -5,6 +5,7 @@
   "submit": ["JobsMixedYes1.mp3", "JobsMixedYes2.mp3", "JobsMixedYes3.mp3", "JobsMixedYes4.mp3"],
   "complete": ["JobsMixedComplete1.mp3", "JobsMixedComplete2.mp3", "JobsMixedComplete3.mp3"],
   "error": ["JobsMixedError1.mp3", "JobsMixedError2.mp3"],
+  "notification": ["JobsMixedWhat1.mp3", "JobsMixedWhat2.mp3", "JobsMixedWhat3.mp3"],
   "precompact": ["JobsMixedPrecompact1.mp3"],
   "session_end": ["JobsMixedSessionEnd1.mp3", "JobsMixedSessionEnd2.mp3"]
 }

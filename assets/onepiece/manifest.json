@@ -5,6 +5,7 @@
   "submit": ["OnepieceLuffyYes1.mp3", "OnepieceLuffyYes2.mp3", "OnepieceLuffyYes3.mp3"],
   "complete": ["OnepieceLuffyComplete1.mp3", "OnepieceLuffyComplete2.mp3"],
   "error": ["OnepieceLuffyError1.mp3", "OnepieceLuffyError2.mp3"],
+  "notification": ["OnepieceLuffyWhat1.mp3", "OnepieceLuffyWhat2.mp3"],
   "precompact": ["OnepieceLuffyPrecompact1.mp3"],
   "session_end": ["OnepieceLuffySessionEnd1.mp3"]
 }

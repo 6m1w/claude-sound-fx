@@ -5,6 +5,7 @@
   "submit": ["GladosMixedYes1.mp3", "GladosMixedYes2.mp3", "GladosMixedYes3.mp3", "GladosMixedYes4.mp3"],
   "complete": ["GladosMixedComplete1.mp3", "GladosMixedComplete2.mp3", "GladosMixedComplete3.mp3"],
   "error": ["GladosMixedError1.mp3", "GladosMixedError2.mp3"],
+  "notification": ["GladosMixedWhat1.mp3", "GladosMixedWhat2.mp3", "GladosMixedWhat3.mp3"],
   "precompact": ["GladosMixedPrecompact1.mp3"],
   "session_end": ["GladosMixedSessionEnd1.mp3", "GladosMixedSessionEnd2.mp3"]
 }
