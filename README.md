@@ -28,11 +28,14 @@ Pick a single theme or go **Mix mode** and let 12 themes collide randomly. JARVI
 
 ## Install
 
-```bash
-claude /plugin install https://github.com/6m1w/claude-sound-fx
+In Claude Code, run these two commands:
+
+```
+/plugin marketplace add 6m1w/claude-sound-fx
+/plugin install sound-fx@claude-sound-fx
 ```
 
-Then inside Claude Code:
+Then configure your theme:
 
 ```
 /sound-fx:setup
@@ -105,33 +108,9 @@ Sound FX hooks into 7 Claude Code lifecycle events:
 | Level | Events |
 |-------|--------|
 | **Full** (default) | All 7 events fire sounds |
-| **Minimal** | Only start, complete, error |
+| **Minimal** | Only start, complete, error, notification |
 
 Config is stored at `~/.claude/sound-fx.local.json`. Re-run `/sound-fx:setup` anytime to change.
-
----
-
-## Remote / SSH Setup
-
-Working on a remote server over SSH? Sounds can't play there, but you can relay them to your local Mac.
-
-**On your local Mac** — start the relay server:
-
-```bash
-# Find your plugin path first
-ls ~/.claude/plugins/sound-fx/
-
-# Start the relay
-python3 ~/.claude/plugins/sound-fx/scripts/relay.py
-```
-
-The relay listens on `127.0.0.1:19876`. When Claude Code runs on the remote machine, hooks automatically detect non-macOS and `curl` events to your local relay via SSH port forwarding.
-
-**SSH with port forwarding:**
-
-```bash
-ssh -R 19876:127.0.0.1:19876 user@remote-server
-```
 
 ---
 
@@ -172,7 +151,6 @@ Empty arrays `[]` are fine — that event just won't play a sound for your theme
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `CLAUDE_SOUND_VOLUME` | `60` | Volume level (0–100) |
-| `CLAUDE_SOUND_PORT` | `19876` | Relay server port for remote mode |
 
 ---
 
