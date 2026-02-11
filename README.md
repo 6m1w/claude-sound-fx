@@ -13,56 +13,16 @@
     ╚═══════════════════════════════════════════════════════════════╝
 ```
 
+<p align="center">
+  English | <a href="./README.zh-CN.md">中文</a> | <a href="./README.ja.md">日本語</a>
+</p>
+
 > Your terminal is too quiet.
 > Let's fix that.
 
 **Sound FX** is a [Claude Code](https://docs.anthropic.com/en/docs/claude-code) plugin that plays themed sound effects in response to lifecycle events — session start, prompt submit, task complete, errors, and more.
 
 Pick a single theme or go **Mix mode** and let 12 themes collide randomly. JARVIS confirms your deploy. GLaDOS mocks your errors. Pikachu celebrates your tests passing. A WoW Peon reluctantly obeys your commands.
-
----
-
-<details>
-<summary>🇨🇳 中文说明</summary>
-
-### Sound FX — Claude Code 主题音效插件
-
-你的终端太安静了。
-
-**Sound FX** 是一个 Claude Code 插件，在会话生命周期事件中播放主题音效。支持 12 个主题，可以选择单一主题，也可以用 Mix 模式让所有主题随机混搭。
-
-**安装：**
-
-```bash
-claude /plugin install https://github.com/6m1w/claude-sound-fx
-```
-
-安装后在 Claude Code 中输入 `/sound-fx:setup` 进行配置。
-
-**支持的事件：** 会话启动、提交 prompt、任务完成、工具报错、context 压缩、会话结束。
-
-</details>
-
-<details>
-<summary>🇯🇵 日本語の説明</summary>
-
-### Sound FX — Claude Code テーマサウンドエフェクトプラグイン
-
-ターミナルが静かすぎる。
-
-**Sound FX** は Claude Code のプラグインで、セッションのライフサイクルイベントにテーマサウンドエフェクトを再生します。12種類のテーマから選択でき、ミックスモードでランダム再生も可能です。
-
-**インストール：**
-
-```bash
-claude /plugin install https://github.com/6m1w/claude-sound-fx
-```
-
-インストール後、Claude Code で `/sound-fx:setup` を実行して設定してください。
-
-**対応イベント：** セッション開始、プロンプト送信、タスク完了、ツールエラー、コンテキスト圧縮、セッション終了。
-
-</details>
 
 ---
 
