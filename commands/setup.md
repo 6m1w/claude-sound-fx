@@ -16,7 +16,40 @@ Available themes (12 total):
 
 1. Read the current config file at `~/.claude/sound-fx.local.json` (it may not exist yet). Note the current settings if any.
 
-2. **Ask Question 1 — Mode** using AskUserQuestion:
+2. **Ask Question 1 — Action** using AskUserQuestion:
+   - header: "Action"
+   - question: "What would you like to do?"
+   - multiSelect: false
+   - options:
+     - label: "Configure (Recommended)", description: "Set up or change your sound effects theme and trigger mode"
+     - label: "Update", description: "Re-apply current settings, refresh hooks, and play a test sound"
+     - label: "Remove", description: "Completely remove sound effects — deletes configuration file"
+
+3. **If user chose "Update"**:
+   - Read the config at `~/.claude/sound-fx.local.json`.
+   - If the file does not exist or is empty, tell the user no configuration found and suggest choosing "Configure" instead. Stop here.
+   - If config exists, display the current settings summary:
+     - Theme: (theme name or "mix")
+     - Trigger mode: (full or minimal)
+     - Enabled: (true or false)
+   - Re-write the same config back to `~/.claude/sound-fx.local.json` (to ensure file integrity).
+   - Play a test sound:
+     ```bash
+     bash ${CLAUDE_PLUGIN_ROOT}/hooks/hook.sh start
+     ```
+   - Confirm: "Settings verified and hooks refreshed. Everything is working!"
+   - **Stop here** (do not continue to further steps).
+
+4. **If user chose "Remove"**:
+   - Delete the config file:
+     ```bash
+     rm -f ~/.claude/sound-fx.local.json
+     ```
+   - Confirm: "Sound effects have been completely removed. Configuration file deleted."
+   - Tell the user: "Run `/sound-fx:setup` anytime to set up sound effects again."
+   - **Stop here** (do not continue to further steps).
+
+5. **If user chose "Configure"**, ask **Question 2 — Mode**:
    - header: "Mode"
    - question: "How would you like sound effects configured?"
    - multiSelect: false
@@ -25,12 +58,12 @@ Available themes (12 total):
      - label: "Mix", description: "All 12 themes randomly mixed for maximum variety"
      - label: "Disable All Sounds", description: "Turn off all sound effects"
 
-3. **If user chose "Disable All Sounds"**: Write config and skip to step 7:
+6. **If user chose "Disable All Sounds"**: Write config and skip to step 10:
    ```json
    {"enabled": false}
    ```
 
-4. **If user chose "Single Theme"**, ask **Question 2 — Theme Group**:
+7. **If user chose "Single Theme"**, ask **Question 3 — Theme Group**:
    - header: "Theme"
    - question: "Which theme group?"
    - multiSelect: false
@@ -39,7 +72,7 @@ Available themes (12 total):
      - label: "JoJo / One Piece / Pikachu / Doraemon", description: "Anime character voice lines"
      - label: "Peon / SCV / Steve Jobs / Keyboard", description: "Gaming sounds, inspirational voice, ASMR"
 
-5. **Then ask Question 3 — Theme** based on the chosen group:
+8. **Then ask Question 4 — Theme** based on the chosen group:
 
    If "Jarvis / GLaDOS / Trek / Optimus":
    - header: "Theme"
@@ -73,7 +106,7 @@ Available themes (12 total):
    - "JoJo" → "jojo", "One Piece" → "onepiece", "Pikachu" → "pikachu", "Doraemon" → "doraemon"
    - "WoW Peon" → "peon", "StarCraft SCV" → "scv", "Steve Jobs" → "jobs", "Mechanical Keyboard" → "keyboard"
 
-6. **Ask Trigger Mode** (for both Mix and Single Theme):
+9. **Ask Trigger Mode** (for both Mix and Single Theme):
    - header: "Trigger"
    - question: "How often should sounds play?"
    - multiSelect: false
@@ -83,7 +116,7 @@ Available themes (12 total):
 
    Map: "Full" → "full", "Minimal" → "minimal"
 
-7. **Write the config** to `~/.claude/sound-fx.local.json`:
+10. **Write the config** to `~/.claude/sound-fx.local.json`:
 
    For Mix mode:
    ```json
@@ -100,12 +133,12 @@ Available themes (12 total):
    {"enabled": false}
    ```
 
-8. **Confirm** the setup is complete. Show a summary:
+11. **Confirm** the setup is complete. Show a summary:
    - Mode: Mix / Single (theme name) / Disabled
    - Trigger: Full / Minimal (if applicable)
    - Tell the user they can re-run `/sound-fx:setup` anytime to change settings.
 
-9. **Play a test sound** (skip if Disabled):
+12. **Play a test sound** (skip if Disabled):
    ```bash
    bash ${CLAUDE_PLUGIN_ROOT}/hooks/hook.sh start
    ```

@@ -39,6 +39,22 @@ claude /plugin install https://github.com/6m1w/claude-sound-fx
 
 安装向导会引导你选择主题和触发模式。
 
+### 更新或卸载
+
+随时运行同一个命令：
+
+```
+/sound-fx:setup
+```
+
+向导会让你选择 **配置**、**更新** 或 **卸载**：
+
+| 操作 | 说明 |
+|------|------|
+| **Configure** | 设置或更改主题和触发模式 |
+| **Update** | 重新应用当前配置、刷新 hooks、播放测试音效 |
+| **Remove** | 彻底移除音效 —— 删除配置文件 |
+
 ### 系统要求
 
 - **macOS**（使用 `afplay` 播放音频）
@@ -92,6 +108,8 @@ Sound FX 挂钩到 7 个 Claude Code 生命周期事件：
  SessionEnd ──→ 🔊 "下次再见。"               (主题: session_end)
 ```
 
+> **注意：** 工具权限弹窗（批准/拒绝弹窗）不属于 Claude Code 可挂钩的生命周期事件，因此本插件无法在权限弹窗时播放音效。
+
 ### 模式
 
 | 模式 | 说明 |
@@ -107,30 +125,6 @@ Sound FX 挂钩到 7 个 Claude Code 生命周期事件：
 | **Minimal** | 仅启动、完成、报错 |
 
 配置存储在 `~/.claude/sound-fx.local.json`。随时运行 `/sound-fx:setup` 重新配置。
-
----
-
-## 远程 / SSH 配置
-
-通过 SSH 在远程服务器上工作？声音无法在远程播放，但你可以将其转发到本地 Mac。
-
-**在本地 Mac 上** —— 启动转发服务器：
-
-```bash
-# 先找到插件路径
-ls ~/.claude/plugins/sound-fx/
-
-# 启动转发
-python3 ~/.claude/plugins/sound-fx/scripts/relay.py
-```
-
-转发服务器监听 `127.0.0.1:19876`。当 Claude Code 在远程机器上运行时，hooks 会自动检测非 macOS 环境并通过 SSH 端口转发将事件 `curl` 到你的本地转发服务器。
-
-**带端口转发的 SSH：**
-
-```bash
-ssh -R 19876:127.0.0.1:19876 user@remote-server
-```
 
 ---
 
@@ -171,7 +165,6 @@ assets/my-theme/
 | 变量 | 默认值 | 说明 |
 |------|--------|------|
 | `CLAUDE_SOUND_VOLUME` | `60` | 音量（0–100） |
-| `CLAUDE_SOUND_PORT` | `19876` | 远程模式的转发服务器端口 |
 
 ---
 

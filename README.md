@@ -43,6 +43,22 @@ Then configure your theme:
 
 That's it. The setup wizard will walk you through theme selection and trigger mode.
 
+### Update or Remove
+
+Run the same command anytime:
+
+```
+/sound-fx:setup
+```
+
+The wizard will ask you to **Configure**, **Update**, or **Remove**:
+
+| Action | What it does |
+|--------|-------------|
+| **Configure** | Set up or change your theme and trigger mode |
+| **Update** | Re-apply current settings, refresh hooks, and play a test sound |
+| **Remove** | Completely remove sound effects — deletes config file |
+
 ### Requirements
 
 - **macOS** (uses `afplay` for audio playback)
@@ -95,6 +111,8 @@ Sound FX hooks into 7 Claude Code lifecycle events:
  PreCompact ──→ 🔊 "Memory failing..."      (theme: precompact)
  SessionEnd ──→ 🔊 "Until next time."       (theme: session_end)
 ```
+
+> **Note:** Tool permission prompts (the approve/deny popup) are not a hookable lifecycle event in Claude Code, so this plugin cannot play sounds for them.
 
 ### Modes
 
