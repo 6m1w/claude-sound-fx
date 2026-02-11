@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "sound-fx",
-      "source": ".",
+      "source": "./",
       "description": "Themed sound effects for Claude Code — 12 themes including Sci-Fi, Anime, Gaming, and more.",
       "version": "0.1.0",
       "author": {
