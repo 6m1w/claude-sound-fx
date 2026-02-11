@@ -1,0 +1,10 @@
+{
+  "name": "World of Warcraft Peon",
+  "description": "Warcraft Peon worker sounds",
+  "start": ["PeonReady1.wav"],
+  "submit": ["PeonYes1.wav", "PeonYes2.wav", "PeonYes3.wav"],
+  "complete": ["PeonBuildingComplete1.wav"],
+  "error": ["PeonPissed1.wav"],
+  "precompact": [],
+  "session_end": []
+}

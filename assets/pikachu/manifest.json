@@ -1,0 +1,10 @@
+{
+  "name": "Pikachu",
+  "description": "Pikachu's signature expressions",
+  "start": ["PikachuReady1.mp3", "PikachuReady2.mp3"],
+  "submit": ["PikachuYes1.mp3", "PikachuYes2.mp3"],
+  "complete": ["PikachuComplete1.mp3"],
+  "error": ["PikachuError1.mp3"],
+  "precompact": ["PikachuPrecompact1.mp3"],
+  "session_end": ["PikachuSessionEnd1.mp3"]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "Mechanical Keyboard",
+  "description": "Satisfying mechanical keyboard sound effects",
+  "start": [
+    "KeyboardStart1.mp3",
+    "KeyboardStart2.mp3"
+  ],
+  "submit": [
+    "KeyboardSubmit1.mp3",
+    "KeyboardSubmit2.mp3"
+  ],
+  "complete": [
+    "KeyboardComplete1.mp3",
+    "KeyboardComplete2.mp3"
+  ],
+  "error": [
+    "KeyboardError1.mp3",
+    "KeyboardError2.mp3"
+  ],
+  "precompact": [
+    "KeyboardPrecompact1.mp3"
+  ],
+  "session_end": [
+    "KeyboardSessionEnd1.mp3"
+  ]
+}

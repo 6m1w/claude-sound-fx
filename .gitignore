@@ -1,0 +1,54 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.relay.pid
+*.local.json
+*.local.md
+
+# Dev environment
+.env
+
+# Generation scripts (keep relay.py)
+scripts/generate_*
+
+# Dev shell scripts at root
+/*.sh
+
+# Samples directory
+samples/
+
+# Voice-only variants (not shipped, Mixed only)
+assets/jarvis/JarvisVoice*
+assets/jarvis/JarvisMixedSubStart*
+assets/jarvis/JarvisMixedSubStop*
+assets/jarvis/JarvisMixedWhat*
+assets/jobs/JobsVoice*
+assets/jobs/JobsMixedSubStart*
+assets/jobs/JobsMixedSubStop*
+assets/jobs/JobsMixedWhat*
+assets/optimus/OptimusVoice*
+assets/optimus/OptimusMixedSubStart*
+assets/optimus/OptimusMixedSubStop*
+assets/optimus/OptimusMixedWhat*
+assets/glados/GladosVoice*
+assets/glados/GladosMixedSubStart*
+assets/glados/GladosMixedSubStop*
+assets/glados/GladosMixedWhat*
+
+# Orphaned sound files from removed events
+assets/peon/PeonWhat*
+assets/peon/PeonYesAttack*
+assets/scv/SCVWhat*
+assets/scv/SCVMove*
+assets/scv/SCVReport*
+assets/trek/TrekHail*
+assets/trek/TrekAlertUser*
+assets/trek/TrekBeep10*
+assets/trek/TrekTransporter*
+assets/trek/TrekWorking*
+assets/jojo/*What*
+assets/onepiece/*What*
+assets/pikachu/*What*
+
+# Removed theme
+assets/vader/

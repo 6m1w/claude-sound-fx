@@ -1,0 +1,28 @@
+{
+  "name": "Doraemon",
+  "description": "Doraemon iconic Japanese robot cat voice",
+  "start": [
+    "DoraemonStart1.mp3",
+    "DoraemonStart2.mp3"
+  ],
+  "submit": [
+    "DoraemonSubmit1.mp3",
+    "DoraemonSubmit2.mp3",
+    "DoraemonSubmit3.mp3"
+  ],
+  "complete": [
+    "DoraemonComplete1.mp3",
+    "DoraemonComplete2.mp3"
+  ],
+  "error": [
+    "DoraemonError1.mp3",
+    "DoraemonError2.mp3"
+  ],
+  "precompact": [
+    "DoraemonPrecompact1.mp3"
+  ],
+  "session_end": [
+    "DoraemonSessionEnd1.mp3",
+    "DoraemonSessionEnd2.mp3"
+  ]
+}

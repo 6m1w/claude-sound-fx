@@ -1,0 +1,10 @@
+{
+  "name": "Star Trek",
+  "description": "Star Trek interface sounds",
+  "start": ["TrekChirp.wav"],
+  "submit": ["TrekBeep1.wav", "TrekBeep5.wav"],
+  "complete": ["TrekProgramComplete.wav", "TrekDataTransmitted.wav"],
+  "error": ["TrekBeep55.wav"],
+  "precompact": ["TrekRedAlert.wav"],
+  "session_end": []
+}

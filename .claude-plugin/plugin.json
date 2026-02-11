@@ -1,0 +1,9 @@
+{
+  "name": "sound-fx",
+  "description": "Themed sound effects for Claude Code — 12 themes including Sci-Fi, Anime, Gaming, and more.",
+  "author": {
+    "name": "6m1w"
+  },
+  "version": "0.1.0",
+  "license": "MIT"
+}

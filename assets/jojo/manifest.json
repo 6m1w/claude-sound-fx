@@ -1,0 +1,10 @@
+{
+  "name": "JoJo's Bizarre Adventure",
+  "description": "DIO and Jotaro iconic Japanese voice lines",
+  "start": ["JojoDioReady1.mp3", "JojoJotaroReady1.mp3"],
+  "submit": ["JojoDioYes1.mp3", "JojoDioYes2.mp3", "JojoJotaroYes1.mp3", "JojoJotaroYes2.mp3"],
+  "complete": ["JojoDioComplete1.mp3", "JojoJotaroComplete1.mp3"],
+  "error": ["JojoDioError1.mp3", "JojoJotaroError1.mp3"],
+  "precompact": ["JojoDioPrecompact1.mp3"],
+  "session_end": ["JojoDioSessionEnd1.mp3", "JojoJotaroSessionEnd1.mp3"]
+}

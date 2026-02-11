@@ -1,0 +1,10 @@
+{
+  "name": "Jarvis",
+  "description": "Iron Man JARVIS AI assistant — voice with sci-fi UI effects",
+  "start": ["JarvisMixedReady1.mp3", "JarvisMixedReady2.mp3", "JarvisMixedReady3.mp3"],
+  "submit": ["JarvisMixedYes1.mp3", "JarvisMixedYes2.mp3", "JarvisMixedYes3.mp3", "JarvisMixedYes4.mp3"],
+  "complete": ["JarvisMixedComplete1.mp3", "JarvisMixedComplete2.mp3", "JarvisMixedComplete3.mp3"],
+  "error": ["JarvisMixedError1.mp3", "JarvisMixedError2.mp3"],
+  "precompact": ["JarvisMixedPrecompact1.mp3"],
+  "session_end": ["JarvisMixedSessionEnd1.mp3", "JarvisMixedSessionEnd2.mp3"]
+}
