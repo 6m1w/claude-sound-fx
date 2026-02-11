@@ -21,8 +21,8 @@ Available themes (12 total):
    - question: "How would you like sound effects configured?"
    - multiSelect: false
    - options:
-     - label: "Mix (Recommended)", description: "All 12 themes randomly mixed for maximum variety"
-     - label: "Single Theme", description: "Choose one specific theme to use exclusively"
+     - label: "Single Theme (Recommended)", description: "Choose one specific theme to use exclusively"
+     - label: "Mix", description: "All 12 themes randomly mixed for maximum variety"
      - label: "Disable All Sounds", description: "Turn off all sound effects"
 
 3. **If user chose "Disable All Sounds"**: Write config and skip to step 7:
