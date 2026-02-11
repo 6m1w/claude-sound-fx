@@ -1,11 +1,11 @@
 {
   "name": "World of Warcraft Peon",
   "description": "Warcraft Peon worker sounds",
-  "start": ["PeonReady1.wav"],
-  "submit": ["PeonYes1.wav", "PeonYes2.wav", "PeonYes3.wav"],
-  "complete": ["PeonBuildingComplete1.wav"],
-  "error": ["PeonPissed1.wav"],
-  "notification": ["PeonWhat1.wav", "PeonWhat3.wav"],
+  "start": ["PeonReady1.mp3"],
+  "submit": ["PeonYes1.mp3", "PeonYes2.mp3", "PeonYes3.mp3"],
+  "complete": ["PeonBuildingComplete1.mp3"],
+  "error": ["PeonPissed1.mp3"],
+  "notification": ["PeonWhat1.mp3", "PeonWhat3.mp3"],
   "precompact": [],
   "session_end": []
 }

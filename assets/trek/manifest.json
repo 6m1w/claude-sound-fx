@@ -1,11 +1,11 @@
 {
   "name": "Star Trek",
   "description": "Star Trek interface sounds",
-  "start": ["TrekChirp.wav"],
-  "submit": ["TrekBeep1.wav", "TrekBeep5.wav"],
-  "complete": ["TrekProgramComplete.wav", "TrekDataTransmitted.wav"],
-  "error": ["TrekBeep55.wav"],
-  "notification": ["TrekHail.wav", "TrekAlertUser.wav"],
-  "precompact": ["TrekRedAlert.wav"],
+  "start": ["TrekChirp.mp3"],
+  "submit": ["TrekBeep1.mp3", "TrekBeep5.mp3"],
+  "complete": ["TrekProgramComplete.mp3", "TrekDataTransmitted.mp3"],
+  "error": ["TrekBeep55.mp3"],
+  "notification": ["TrekHail.mp3", "TrekAlertUser.mp3"],
+  "precompact": ["TrekRedAlert.mp3"],
   "session_end": []
 }

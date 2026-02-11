@@ -39,16 +39,16 @@ EVENT_VOLUME_SCALE = {
 
 # Map events to Trek sound files (remote mode uses Trek only)
 EVENT_MAP = {
-    "start":          ["TrekChirp.wav"],
-    "submit":         ["TrekBeep1.wav", "TrekBeep5.wav"],
-    "what":           ["TrekHail.wav", "TrekAlertUser.wav"],
-    "complete":       ["TrekProgramComplete.wav", "TrekDataTransmitted.wav"],
-    "error":          ["TrekBeep55.wav", "TrekRedAlert.wav"],
-    "beep":           ["TrekBeep1.wav", "TrekBeep5.wav", "TrekBeep10.wav"],
-    "subagent_start": ["TrekTransporter.wav"],
-    "subagent_stop":  ["TrekWorking.wav", "TrekBeep10.wav"],
-    "precompact":     ["TrekRedAlert.wav"],
-    "session_end":    ["TrekChirp.wav"],
+    "start":          ["TrekChirp.mp3"],
+    "submit":         ["TrekBeep1.mp3", "TrekBeep5.mp3"],
+    "what":           ["TrekHail.mp3", "TrekAlertUser.mp3"],
+    "complete":       ["TrekProgramComplete.mp3", "TrekDataTransmitted.mp3"],
+    "error":          ["TrekBeep55.mp3", "TrekRedAlert.mp3"],
+    "beep":           ["TrekBeep1.mp3", "TrekBeep5.mp3", "TrekBeep10.mp3"],
+    "subagent_start": ["TrekTransporter.mp3"],
+    "subagent_stop":  ["TrekWorking.mp3", "TrekBeep10.mp3"],
+    "precompact":     ["TrekRedAlert.mp3"],
+    "session_end":    ["TrekChirp.mp3"],
 }
 
 

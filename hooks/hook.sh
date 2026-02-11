@@ -60,7 +60,7 @@ fi
 # Minimal mode: only essential events
 if [ "$MODE" = "minimal" ]; then
   case "$EVENT" in
-    start|complete|error) ;;
+    start|complete|error|notification) ;;
     *) exit 0 ;;
   esac
 fi

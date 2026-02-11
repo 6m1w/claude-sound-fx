@@ -5,7 +5,7 @@ allowed-tools: [Read, Write, Bash, AskUserQuestion]
 
 # Sound FX Setup
 
-You are configuring the Sound FX plugin for Claude Code. This plugin plays themed sound effects in response to Claude Code events (session start, prompt submit, task complete, error, context compact, session end).
+You are configuring the Sound FX plugin for Claude Code. This plugin plays themed sound effects in response to Claude Code events (session start, prompt submit, task complete, error, notification, context compact, session end).
 
 Available themes (12 total):
 - **Sci-Fi & AI**: Jarvis (Iron Man), GLaDOS (Portal), Star Trek, Optimus Prime (Transformers)
@@ -30,42 +30,42 @@ Available themes (12 total):
    {"enabled": false}
    ```
 
-4. **If user chose "Single Theme"**, ask **Question 2 — Category**:
-   - header: "Category"
-   - question: "Which category interests you?"
+4. **If user chose "Single Theme"**, ask **Question 2 — Theme Group**:
+   - header: "Theme"
+   - question: "Which theme group?"
    - multiSelect: false
    - options:
-     - label: "Sci-Fi & AI", description: "Jarvis, GLaDOS, Star Trek, Optimus Prime"
-     - label: "Anime", description: "JoJo, One Piece, Pikachu, Doraemon"
-     - label: "Gaming & Other", description: "WoW Peon, StarCraft SCV, Steve Jobs, Mechanical Keyboard"
+     - label: "Jarvis / GLaDOS / Trek / Optimus", description: "Sci-Fi & AI voices and interface sounds"
+     - label: "JoJo / One Piece / Pikachu / Doraemon", description: "Anime character voice lines"
+     - label: "Peon / SCV / Steve Jobs / Keyboard", description: "Gaming sounds, inspirational voice, ASMR"
 
-5. **Then ask Question 3 — Theme** based on the chosen category:
+5. **Then ask Question 3 — Theme** based on the chosen group:
 
-   If "Sci-Fi & AI":
+   If "Jarvis / GLaDOS / Trek / Optimus":
    - header: "Theme"
-   - question: "Which Sci-Fi theme?"
+   - question: "Which theme?"
    - options:
      - label: "Jarvis", description: "Iron Man JARVIS AI assistant — voice with sci-fi UI effects"
      - label: "GLaDOS", description: "Portal's passive-aggressive AI with dark humor"
      - label: "Star Trek", description: "Classic starship interface beeps and chirps"
      - label: "Optimus Prime", description: "Transformers commander — heroic voice with effects"
 
-   If "Anime":
+   If "JoJo / One Piece / Pikachu / Doraemon":
    - header: "Theme"
-   - question: "Which Anime theme?"
+   - question: "Which theme?"
    - options:
      - label: "JoJo", description: "DIO and Jotaro iconic voice lines from JoJo's Bizarre Adventure"
      - label: "One Piece", description: "Monkey D. Luffy's energetic voice lines"
      - label: "Pikachu", description: "Pikachu's signature expressions"
      - label: "Doraemon", description: "Doraemon iconic robot cat voice"
 
-   If "Gaming & Other":
+   If "Peon / SCV / Steve Jobs / Keyboard":
    - header: "Theme"
    - question: "Which theme?"
    - options:
-     - label: "WoW Peon", description: "Warcraft Peon — 'Ready to work!' and classic worker sounds"
-     - label: "StarCraft SCV", description: "StarCraft SCV — 'SCV good to go, sir!'"
-     - label: "Steve Jobs", description: "Steve Jobs inspirational voice with background effects"
+     - label: "WoW Peon", description: "'Ready to work!' — Warcraft Peon worker sounds"
+     - label: "StarCraft SCV", description: "'SCV good to go, sir!' — StarCraft worker sounds"
+     - label: "Steve Jobs", description: "Inspirational voice with background effects"
      - label: "Mechanical Keyboard", description: "Satisfying mechanical keyboard ASMR sounds"
 
    Map theme names to directory names:
@@ -73,13 +73,13 @@ Available themes (12 total):
    - "JoJo" → "jojo", "One Piece" → "onepiece", "Pikachu" → "pikachu", "Doraemon" → "doraemon"
    - "WoW Peon" → "peon", "StarCraft SCV" → "scv", "Steve Jobs" → "jobs", "Mechanical Keyboard" → "keyboard"
 
-6. **Ask Question 4 — Trigger Mode** (for both Mix and Single Theme):
+6. **Ask Trigger Mode** (for both Mix and Single Theme):
    - header: "Trigger"
    - question: "How often should sounds play?"
    - multiSelect: false
    - options:
-     - label: "Full (Recommended)", description: "All 6 events: start, submit, complete, error, compact, session end"
-     - label: "Minimal", description: "Essential only: start, complete, error"
+     - label: "Full (Recommended)", description: "All 7 events: start, submit, complete, error, notification, compact, session end"
+     - label: "Minimal", description: "Essential only: start, complete, error, notification"
 
    Map: "Full" → "full", "Minimal" → "minimal"
 

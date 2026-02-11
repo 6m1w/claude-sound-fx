@@ -1,11 +1,11 @@
 {
   "name": "StarCraft SCV",
   "description": "StarCraft SCV worker sounds",
-  "start": ["SCVReady1.wav"],
-  "submit": ["SCVYes1.wav", "SCVYes2.wav", "SCVYes3.wav"],
-  "complete": ["SCVComplete1.wav"],
-  "error": ["SCVErr1.wav", "SCVErr2.wav", "SCVError1.wav", "SCVError2.wav"],
-  "notification": ["SCVWhat1.wav", "SCVWhat2.wav", "SCVWhat3.wav", "SCVWhat4.wav"],
+  "start": ["SCVReady1.mp3"],
+  "submit": ["SCVYes1.mp3", "SCVYes2.mp3", "SCVYes3.mp3"],
+  "complete": ["SCVComplete1.mp3"],
+  "error": ["SCVErr1.mp3", "SCVErr2.mp3", "SCVError1.mp3", "SCVError2.mp3"],
+  "notification": ["SCVWhat1.mp3", "SCVWhat2.mp3", "SCVWhat3.mp3", "SCVWhat4.mp3"],
   "precompact": [],
-  "session_end": ["SCVPissed1.wav", "SCVPissed2.wav", "SCVPissed3.wav"]
+  "session_end": ["SCVPissed1.mp3", "SCVPissed2.mp3", "SCVPissed3.mp3"]
 }
