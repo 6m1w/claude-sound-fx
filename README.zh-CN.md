@@ -27,11 +27,14 @@
 
 ## 安装
 
-```bash
-claude /plugin install https://github.com/6m1w/claude-sound-fx
+在 Claude Code 中运行以下两条命令：
+
+```
+/plugin marketplace add 6m1w/claude-sound-fx
+/plugin install sound-fx@claude-sound-fx
 ```
 
-然后在 Claude Code 中运行：
+然后配置你的主题：
 
 ```
 /sound-fx:setup
@@ -122,7 +125,7 @@ Sound FX 挂钩到 7 个 Claude Code 生命周期事件：
 | 级别 | 事件 |
 |------|------|
 | **Full**（默认） | 全部 7 个事件都会触发音效 |
-| **Minimal** | 仅启动、完成、报错 |
+| **Minimal** | 仅启动、完成、报错、通知 |
 
 配置存储在 `~/.claude/sound-fx.local.json`。随时运行 `/sound-fx:setup` 重新配置。
 
