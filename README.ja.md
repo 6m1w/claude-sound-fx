@@ -19,15 +19,52 @@
 
 > ターミナルが静かすぎる。音をつけよう。
 
-**Sound FX** は [Claude Code](https://docs.anthropic.com/en/docs/claude-code) のプラグインで、セッションのライフサイクルイベント（セッション開始、プロンプト送信、タスク完了、エラーなど）にテーマサウンドエフェクトを再生します。
+**Sound FX** は AI コーディングアシスタントのライフサイクルイベント（セッション開始、プロンプト送信、タスク完了、エラーなど）にテーマサウンドエフェクトを再生します。[Claude Code](https://docs.anthropic.com/en/docs/claude-code) と [Opencode](https://opencode.ai) に対応。
 
 テーマを1つ選ぶか、**Mix モード**で12種類のテーマをランダムに混ぜましょう。JARVIS がデプロイを確認し、GLaDOS がエラーを嘲笑い、ピカチュウがテスト成功を祝い、WoW のペオンが渋々コマンドに従います。
 
 ---
 
+## プラットフォーム対応
+
+すべての主要プラットフォームで動作します。ローカル使用では追加セットアップ不要。
+
+| プラットフォーム | 追加セットアップ | 仕組み |
+|------------------|:------------:|--------|
+| **macOS** | 不要 | `afplay` で直接再生 |
+| **Windows (WSL)** | 不要 | WSL interop で `powershell.exe` または `ffplay.exe` を自動使用 |
+| **Linux デスクトップ** | 不要 | `paplay` / `ffplay` / `aplay` を自動検出 |
+| **リモートサーバー (SSH)** | 必要 | ローカルマシンで relay スクリプトを実行 — 下記参照 |
+
+### リモートサーバーセットアップ
+
+オーディオハードウェアのない headless サーバーで実行する場合、軽量な HTTP relay 経由でローカルマシンにサウンドを転送します：
+
+```bash
+# ① ローカルマシンでリポジトリをクローン
+git clone https://github.com/6m1w/claude-sound-fx.git
+
+# ② relay を起動（バックグラウンド実行、ポート 19876 で待機）
+python3 claude-sound-fx/scripts/relay.py &
+
+# ③ ポート転送付きで SSH 接続
+ssh -R 19876:127.0.0.1:19876 your-server
+
+# ④ サーバー上で Claude Code / Opencode を通常通り使用 — サウンドはローカルで再生
+```
+
+Relay コマンド：
+
+```bash
+python3 scripts/relay.py --status  # 設定とロードされたテーマを表示
+python3 scripts/relay.py --kill    # relay を停止
+```
+
+---
+
 ## インストール
 
-Claude Code 内で以下の2つのコマンドを実行：
+### Claude Code
 
 ```
 /plugin marketplace add 6m1w/claude-sound-fx
@@ -41,6 +78,22 @@ Claude Code 内で以下の2つのコマンドを実行：
 ```
 
 セットアップウィザードがテーマ選択とトリガーモードの設定を案内します。
+
+### Opencode
+
+```bash
+npm install @6m1w/opencode-sound-fx
+```
+
+`opencode.json` に追加：
+
+```json
+{
+  "plugin": ["@6m1w/opencode-sound-fx"]
+}
+```
+
+同じ設定ファイル（`~/.claude/sound-fx.local.json`）とオーディオテーマを共有します。
 
 ### 更新・削除
 
@@ -57,12 +110,6 @@ Claude Code 内で以下の2つのコマンドを実行：
 | **Configure** | テーマとトリガーモードの設定・変更 |
 | **Update** | 現在の設定を再適用、フックを更新、テストサウンドを再生 |
 | **Remove** | サウンドエフェクトを完全に削除 — 設定ファイルを削除 |
-
-### 必要条件
-
-- プラグイン対応の **Claude Code**
-- **Python 3**（設定ファイルの読み取り用 — macOS/Linux に標準搭載）
-- オーディオプレーヤー：`afplay`（macOS）、`paplay` / `ffplay` / `aplay`（Linux）、PowerShell（Windows）
 
 ---
 
@@ -99,7 +146,7 @@ Claude Code 内で以下の2つのコマンドを実行：
 
 ## 仕組み
 
-Sound FX は7つの Claude Code ライフサイクルイベントにフックします：
+Sound FX は7つのライフサイクルイベントにフックします：
 
 ```
  SessionStart ──→ 🔊 「準備完了。」              (テーマ: start)
@@ -160,56 +207,6 @@ assets/my-theme/
 ```
 
 空の配列 `[]` はそのイベントでサウンドを再生しないことを意味します。
-
----
-
-## クロスプラットフォーム対応
-
-| プラットフォーム | セットアップ | 仕組み |
-|------------------|------------|--------|
-| **macOS** | インストールのみ | `afplay` で直接再生 |
-| **Linux デスクトップ** | インストールのみ | `paplay` / `ffplay` / `aplay` を自動検出 |
-| **Windows (WSL)** | インストールのみ | WSL interop で `powershell.exe` または `ffplay.exe` を自動使用 |
-| **リモート SSH** | relay 起動 + SSH ポート転送が必要 | 下記参照 |
-
-### リモート SSH セットアップ
-
-リモートサーバー（オーディオなしの headless マシン）で Claude Code を使う場合、サウンドをローカルマシンに転送する必要があります：
-
-```bash
-# ローカルマシンで relay を起動
-python3 scripts/relay.py
-
-# SSH ポート転送付きで接続
-ssh -R 19876:127.0.0.1:19876 your-server
-```
-
-Relay コマンド：
-
-```bash
-python3 scripts/relay.py           # フォアグラウンド起動
-python3 scripts/relay.py &         # バックグラウンド起動
-python3 scripts/relay.py --status  # 設定とロードされたテーマを表示
-python3 scripts/relay.py --kill    # 停止
-```
-
-### Opencode
-
-Sound FX は [Opencode](https://opencode.ai) プラグインとしても利用可能：
-
-```bash
-npm install @6m1w/opencode-sound-fx
-```
-
-`opencode.json` に追加：
-
-```json
-{
-  "plugin": ["@6m1w/opencode-sound-fx"]
-}
-```
-
-同じ設定ファイル（`~/.claude/sound-fx.local.json`）とオーディオテーマを共有します。
 
 ---
 

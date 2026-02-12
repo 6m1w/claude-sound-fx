@@ -20,15 +20,52 @@
 > Your terminal is too quiet.
 > Let's fix that.
 
-**Sound FX** is a [Claude Code](https://docs.anthropic.com/en/docs/claude-code) plugin that plays themed sound effects in response to lifecycle events — session start, prompt submit, task complete, errors, and more.
+**Sound FX** plays themed sound effects in response to AI coding assistant lifecycle events — session start, prompt submit, task complete, errors, and more. Works with [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and [Opencode](https://opencode.ai).
 
 Pick a single theme or go **Mix mode** and let 12 themes collide randomly. JARVIS confirms your deploy. GLaDOS mocks your errors. Pikachu celebrates your tests passing. A WoW Peon reluctantly obeys your commands.
 
 ---
 
+## Platform Support
+
+Works on every major platform. No extra setup needed for local use.
+
+| Platform | Extra setup? | How it works |
+|----------|:------------:|-------------|
+| **macOS** | No | Plays via `afplay` directly |
+| **Windows (WSL)** | No | Auto-calls `powershell.exe` or `ffplay.exe` via WSL interop |
+| **Linux desktop** | No | Auto-detects `paplay` / `ffplay` / `aplay` |
+| **Remote server (SSH)** | Yes | Requires a relay script on your local machine — see below |
+
+### Remote server setup
+
+When running on a headless server with no audio hardware, sounds are forwarded to your local machine via a lightweight HTTP relay:
+
+```bash
+# ① Clone the repo on your LOCAL machine
+git clone https://github.com/6m1w/claude-sound-fx.git
+
+# ② Start the relay (runs in background, listens on port 19876)
+python3 claude-sound-fx/scripts/relay.py &
+
+# ③ SSH into the remote server with port forwarding
+ssh -R 19876:127.0.0.1:19876 your-server
+
+# ④ On the server, use Claude Code / Opencode as usual — sounds play locally
+```
+
+Relay commands:
+
+```bash
+python3 scripts/relay.py --status  # Show config and loaded themes
+python3 scripts/relay.py --kill    # Stop the relay
+```
+
+---
+
 ## Install
 
-In Claude Code, run these two commands:
+### Claude Code
 
 ```
 /plugin marketplace add 6m1w/claude-sound-fx
@@ -41,7 +78,23 @@ Then configure your theme:
 /sound-fx:setup
 ```
 
-That's it. The setup wizard will walk you through theme selection and trigger mode.
+The setup wizard will walk you through theme selection and trigger mode.
+
+### Opencode
+
+```bash
+npm install @6m1w/opencode-sound-fx
+```
+
+Add to `opencode.json`:
+
+```json
+{
+  "plugin": ["@6m1w/opencode-sound-fx"]
+}
+```
+
+Shares the same config file (`~/.claude/sound-fx.local.json`) and audio themes.
 
 ### Update or Remove
 
@@ -59,12 +112,6 @@ The wizard will ask you to **Configure**, **Update**, or **Remove**:
 | **Update** | Re-apply current settings, refresh hooks, and play a test sound |
 | **Remove** | Completely remove sound effects — deletes config file |
 
-### Requirements
-
-- **Claude Code** with plugin support
-- **Python 3** (for reading config — ships with macOS/Linux)
-- Audio player: `afplay` (macOS), `paplay` / `ffplay` / `aplay` (Linux), or PowerShell (Windows)
-
 ---
 
 ## Themes
@@ -78,7 +125,7 @@ The wizard will ask you to **Configure**, **Update**, or **Remove**:
 | **Star Trek** | Classic starship interface chirps, beeps, and red alerts. | Star Trek |
 | **Optimus Prime** | *"Autobots, roll out."* — Heroic commander energy. | Transformers |
 
-### Anime アニメ
+### Anime
 
 | Theme | Vibe | Origin |
 |-------|------|--------|
@@ -100,7 +147,7 @@ The wizard will ask you to **Configure**, **Update**, or **Remove**:
 
 ## How It Works
 
-Sound FX hooks into 7 Claude Code lifecycle events:
+Sound FX hooks into 7 lifecycle events:
 
 ```
  SessionStart ──→ 🔊 "I am ready."         (theme: start)
@@ -161,56 +208,6 @@ assets/my-theme/
 ```
 
 Empty arrays `[]` are fine — that event just won't play a sound for your theme.
-
----
-
-## Cross-Platform Support
-
-| Platform | Setup | How it works |
-|----------|-------|-------------|
-| **macOS** | Just install | Plays via `afplay` directly |
-| **Linux desktop** | Just install | Auto-detects `paplay` / `ffplay` / `aplay` |
-| **Windows (WSL)** | Just install | Auto-detects `powershell.exe` or `ffplay.exe` via WSL interop |
-| **Remote SSH** | Start relay + SSH port forward | See below |
-
-### Remote SSH setup
-
-When running Claude Code on a remote server (headless, no audio hardware), sounds need to be forwarded to your local machine:
-
-```bash
-# On your LOCAL machine — start the relay
-python3 scripts/relay.py
-
-# SSH with port forwarding
-ssh -R 19876:127.0.0.1:19876 your-server
-```
-
-Relay commands:
-
-```bash
-python3 scripts/relay.py           # Start (foreground)
-python3 scripts/relay.py &         # Start (background)
-python3 scripts/relay.py --status  # Show config and loaded themes
-python3 scripts/relay.py --kill    # Stop
-```
-
-### Opencode
-
-Sound FX is also available as an [Opencode](https://opencode.ai) plugin:
-
-```bash
-npm install @6m1w/opencode-sound-fx
-```
-
-Add to `opencode.json`:
-
-```json
-{
-  "plugin": ["@6m1w/opencode-sound-fx"]
-}
-```
-
-Shares the same config file (`~/.claude/sound-fx.local.json`) and audio themes.
 
 ---
 
