@@ -17,11 +17,14 @@
   <a href="./README.md">English</a> | 中文 | <a href="./README.ja.md">日本語</a>
 </p>
 
-> 你的终端太安静了。来点声音吧。
+> 你启动了一个任务，切到浏览器，然后忘了终端。
+> 五分钟后回来一看 —— 它早就在等你了。
 
-**Sound FX** 在 AI 编程助手的生命周期事件中播放主题音效 —— 会话启动、提交 prompt、任务完成、工具报错等。支持 [Claude Code](https://docs.anthropic.com/en/docs/claude-code) 和 [Opencode](https://opencode.ai)。
+**Sound FX** 为 [Claude Code](https://docs.anthropic.com/en/docs/claude-code) 和 [Opencode](https://opencode.ai) 添加主题音效提示，让你不用再盯着终端。任务完成、出错、需要你操作 —— 即使你在别的窗口，也能第一时间听到。
 
 选择一个主题，或者开启 **Mix 模式**，让 12 个主题随机混搭。JARVIS 确认你的部署，GLaDOS 嘲讽你的错误，皮卡丘庆祝你的测试通过，魔兽争霸的苦工不情愿地执行你的命令。
+
+https://github.com/user-attachments/assets/c47537fc-1c18-4256-877d-0f22d4314bfd
 
 ---
 

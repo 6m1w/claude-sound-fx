@@ -17,11 +17,14 @@
   <a href="./README.md">English</a> | <a href="./README.zh-CN.md">中文</a> | 日本語
 </p>
 
-> ターミナルが静かすぎる。音をつけよう。
+> タスクを開始して、ブラウザに切り替えて、ターミナルのことを忘れる。
+> 5分後に戻ると —— ずっとあなたを待っていた。
 
-**Sound FX** は AI コーディングアシスタントのライフサイクルイベント（セッション開始、プロンプト送信、タスク完了、エラーなど）にテーマサウンドエフェクトを再生します。[Claude Code](https://docs.anthropic.com/en/docs/claude-code) と [Opencode](https://opencode.ai) に対応。
+**Sound FX** は [Claude Code](https://docs.anthropic.com/en/docs/claude-code) と [Opencode](https://opencode.ai) にテーマ音声キューを追加し、ターミナルを監視し続ける必要をなくします。タスク完了、エラー発生、入力待ち —— 別のウィンドウにいても聞こえます。
 
 テーマを1つ選ぶか、**Mix モード**で12種類のテーマをランダムに混ぜましょう。JARVIS がデプロイを確認し、GLaDOS がエラーを嘲笑い、ピカチュウがテスト成功を祝い、WoW のペオンが渋々コマンドに従います。
+
+https://github.com/user-attachments/assets/c47537fc-1c18-4256-877d-0f22d4314bfd
 
 ---
 

@@ -17,12 +17,14 @@
   English | <a href="./README.zh-CN.md">中文</a> | <a href="./README.ja.md">日本語</a>
 </p>
 
-> Your terminal is too quiet.
-> Let's fix that.
+> You kick off a task, switch to your browser, and forget about the terminal.
+> Five minutes later you check back — it's been waiting for you the whole time.
 
-**Sound FX** plays themed sound effects in response to AI coding assistant lifecycle events — session start, prompt submit, task complete, errors, and more. Works with [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and [Opencode](https://opencode.ai).
+**Sound FX** adds themed audio cues to [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and [Opencode](https://opencode.ai) so you never have to babysit the terminal again. Hear when a task finishes, when something breaks, or when the AI needs your input — even while you're in another window.
 
 Pick a single theme or go **Mix mode** and let 12 themes collide randomly. JARVIS confirms your deploy. GLaDOS mocks your errors. Pikachu celebrates your tests passing. A WoW Peon reluctantly obeys your commands.
+
+https://github.com/user-attachments/assets/c47537fc-1c18-4256-877d-0f22d4314bfd
 
 ---
 
