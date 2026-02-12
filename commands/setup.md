@@ -106,17 +106,12 @@ Available themes (12 total):
    - "JoJo" → "jojo", "One Piece" → "onepiece", "Pikachu" → "pikachu", "Doraemon" → "doraemon"
    - "WoW Peon" → "peon", "StarCraft SCV" → "scv", "Steve Jobs" → "jobs", "Mechanical Keyboard" → "keyboard"
 
-9. **Preview the selected theme** — play a random sound from the chosen theme so the user can hear it before committing:
+9. **Preview the selected theme** — play a random sound so the user can hear it before committing:
    - Tell the user: "Playing a preview of [Theme Display Name]..."
-   - Play a random sound file from the theme's manifest:
+   - Write a temporary config to preview the theme, then trigger hook.sh:
      ```bash
-     FILE=$(python3 -c "
-     import json, random, os
-     base = os.path.join('${CLAUDE_PLUGIN_ROOT}', 'assets', '<directory_name>')
-     m = json.load(open(os.path.join(base, 'manifest.json')))
-     files = [f for v in m.values() if isinstance(v, list) for f in v]
-     print(os.path.join(base, random.choice(files)))
-     ") && afplay "$FILE" &
+     printf '{"theme": "<directory_name>", "mode": "full", "enabled": true}' > ~/.claude/sound-fx.local.json
+     bash ${CLAUDE_PLUGIN_ROOT}/hooks/hook.sh start
      ```
      (Replace `<directory_name>` with the mapped directory name from step 8)
 
@@ -167,3 +162,29 @@ Available themes (12 total):
    ```bash
    bash ${CLAUDE_PLUGIN_ROOT}/hooks/hook.sh start
    ```
+
+15. **Platform check** — detect the environment and provide guidance if needed:
+   ```bash
+   uname -s
+   ```
+   - If the output is **Darwin**: no further setup needed.
+   - If the output is **Linux**: run this check to see if audio will work locally:
+     ```bash
+     command -v paplay >/dev/null 2>&1 || command -v ffplay >/dev/null 2>&1 || command -v aplay >/dev/null 2>&1 && echo "LOCAL_AUDIO_OK" || echo "NO_LOCAL_AUDIO"
+     ```
+     - If **LOCAL_AUDIO_OK**: tell the user "Audio player detected — sounds will play directly on this machine. No extra setup needed."
+     - If **NO_LOCAL_AUDIO**: check for WSL:
+       ```bash
+       grep -qi microsoft /proc/version 2>/dev/null && echo "WSL" || echo "HEADLESS"
+       ```
+       - If **WSL**: check for Windows-side players:
+         ```bash
+         command -v powershell.exe >/dev/null 2>&1 || command -v ffplay.exe >/dev/null 2>&1 && echo "WSL_AUDIO_OK" || echo "WSL_NO_AUDIO"
+         ```
+         - If **WSL_AUDIO_OK**: tell the user "Windows audio player detected via WSL — sounds will play through Windows. No extra setup needed."
+         - If **WSL_NO_AUDIO**: tell the user "No audio player detected. Install ffmpeg on Windows (`winget install ffmpeg`) or sounds will be silent."
+       - If **HEADLESS** (remote server, no audio): tell the user:
+         "This appears to be a remote/headless server with no audio output. To hear sounds, set up the relay on your **local machine**:
+         1. Clone the repo: `git clone https://github.com/6m1w/claude-sound-fx`
+         2. Start relay: `python3 claude-sound-fx/scripts/relay.py &`
+         3. SSH with port forwarding: `ssh -R 19876:127.0.0.1:19876 this-server`"

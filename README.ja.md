@@ -60,9 +60,9 @@ Claude Code 内で以下の2つのコマンドを実行：
 
 ### 必要条件
 
-- **macOS**（音声再生に `afplay` を使用）
 - プラグイン対応の **Claude Code**
-- **Python 3**（設定ファイルの読み取り用 — macOS に標準搭載）
+- **Python 3**（設定ファイルの読み取り用 — macOS/Linux に標準搭載）
+- オーディオプレーヤー：`afplay`（macOS）、`paplay` / `ffplay` / `aplay`（Linux）、PowerShell（Windows）
 
 ---
 
@@ -163,11 +163,62 @@ assets/my-theme/
 
 ---
 
+## クロスプラットフォーム対応
+
+| プラットフォーム | セットアップ | 仕組み |
+|------------------|------------|--------|
+| **macOS** | インストールのみ | `afplay` で直接再生 |
+| **Linux デスクトップ** | インストールのみ | `paplay` / `ffplay` / `aplay` を自動検出 |
+| **Windows (WSL)** | インストールのみ | WSL interop で `powershell.exe` または `ffplay.exe` を自動使用 |
+| **リモート SSH** | relay 起動 + SSH ポート転送が必要 | 下記参照 |
+
+### リモート SSH セットアップ
+
+リモートサーバー（オーディオなしの headless マシン）で Claude Code を使う場合、サウンドをローカルマシンに転送する必要があります：
+
+```bash
+# ローカルマシンで relay を起動
+python3 scripts/relay.py
+
+# SSH ポート転送付きで接続
+ssh -R 19876:127.0.0.1:19876 your-server
+```
+
+Relay コマンド：
+
+```bash
+python3 scripts/relay.py           # フォアグラウンド起動
+python3 scripts/relay.py &         # バックグラウンド起動
+python3 scripts/relay.py --status  # 設定とロードされたテーマを表示
+python3 scripts/relay.py --kill    # 停止
+```
+
+### Opencode
+
+Sound FX は [Opencode](https://opencode.ai) プラグインとしても利用可能：
+
+```bash
+npm install @6m1w/opencode-sound-fx
+```
+
+`opencode.json` に追加：
+
+```json
+{
+  "plugin": ["@6m1w/opencode-sound-fx"]
+}
+```
+
+同じ設定ファイル（`~/.claude/sound-fx.local.json`）とオーディオテーマを共有します。
+
+---
+
 ## 環境変数
 
 | 変数 | デフォルト | 説明 |
 |------|-----------|------|
 | `CLAUDE_SOUND_VOLUME` | `60` | 音量レベル（0–100） |
+| `CLAUDE_SOUND_PORT` | `19876` | Relay サーバーポート |
 
 ---
 

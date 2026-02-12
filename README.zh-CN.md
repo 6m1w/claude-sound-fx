@@ -60,9 +60,9 @@
 
 ### 系统要求
 
-- **macOS**（使用 `afplay` 播放音频）
 - 支持插件的 **Claude Code**
-- **Python 3**（用于读取配置 —— macOS 自带）
+- **Python 3**（用于读取配置 —— macOS/Linux 自带）
+- 音频播放器：`afplay`（macOS）、`paplay` / `ffplay` / `aplay`（Linux）或 PowerShell（Windows）
 
 ---
 
@@ -163,11 +163,62 @@ assets/my-theme/
 
 ---
 
+## 跨平台支持
+
+| 平台 | 安装方式 | 工作原理 |
+|------|---------|---------|
+| **macOS** | 装插件即可 | 通过 `afplay` 直接播放 |
+| **Linux 桌面** | 装插件即可 | 自动检测 `paplay` / `ffplay` / `aplay` |
+| **Windows (WSL)** | 装插件即可 | 通过 WSL interop 自动调用 `powershell.exe` 或 `ffplay.exe` |
+| **远程 SSH** | 需要启动 relay + SSH 端口转发 | 见下方 |
+
+### 远程 SSH 设置
+
+在远程服务器（无声卡的 headless 机器）上使用 Claude Code 时，声音需要转发到本地：
+
+```bash
+# 在本地机器上启动 relay
+python3 scripts/relay.py
+
+# SSH 连接时带端口转发
+ssh -R 19876:127.0.0.1:19876 your-server
+```
+
+Relay 命令：
+
+```bash
+python3 scripts/relay.py           # 前台启动
+python3 scripts/relay.py &         # 后台启动
+python3 scripts/relay.py --status  # 查看配置和加载的主题
+python3 scripts/relay.py --kill    # 停止
+```
+
+### Opencode
+
+Sound FX 同时支持 [Opencode](https://opencode.ai) 插件：
+
+```bash
+npm install @6m1w/opencode-sound-fx
+```
+
+在 `opencode.json` 中添加：
+
+```json
+{
+  "plugin": ["@6m1w/opencode-sound-fx"]
+}
+```
+
+共享相同的配置文件（`~/.claude/sound-fx.local.json`）和音频主题。
+
+---
+
 ## 环境变量
 
 | 变量 | 默认值 | 说明 |
 |------|--------|------|
 | `CLAUDE_SOUND_VOLUME` | `60` | 音量（0–100） |
+| `CLAUDE_SOUND_PORT` | `19876` | Relay 服务端口 |
 
 ---
 

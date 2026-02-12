@@ -1,0 +1,26 @@
+{
+  "name": "@6m1w/opencode-sound-fx",
+  "version": "0.2.0",
+  "description": "Themed sound effects for Opencode — play audio feedback on session events",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "bun build src/index.ts --outdir dist --target bun",
+    "typecheck": "tsc --noEmit",
+    "dev": "bun run --watch src/index.ts"
+  },
+  "keywords": ["opencode", "plugin", "sound-effects", "audio", "sound-fx"],
+  "author": "6m1w",
+  "license": "MIT",
+  "dependencies": {
+    "@opencode-ai/plugin": "latest"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "bun-types": ">=1.0.0"
+  }
+}

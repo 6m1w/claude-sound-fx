@@ -65,8 +65,34 @@ if [ "$MODE" = "minimal" ]; then
   esac
 fi
 
-# Remote mode: forward to local relay
-if [ "$(uname)" != "Darwin" ]; then
+# Detect audio player: local player if available, otherwise relay
+PLAYER=""
+IS_WSL=false
+if [ "$(uname)" = "Darwin" ]; then
+  PLAYER="afplay"
+else
+  # Check for WSL — try Windows-side players first
+  if grep -qi microsoft /proc/version 2>/dev/null; then
+    IS_WSL=true
+    if command -v ffplay.exe >/dev/null 2>&1; then
+      PLAYER="ffplay.exe"
+    elif command -v powershell.exe >/dev/null 2>&1; then
+      PLAYER="powershell.exe"
+    fi
+  fi
+  # Linux native players (also works if WSL has PulseAudio via WSLg)
+  if [ -z "$PLAYER" ]; then
+    for cmd in paplay ffplay aplay; do
+      if command -v "$cmd" >/dev/null 2>&1; then
+        PLAYER="$cmd"
+        break
+      fi
+    done
+  fi
+fi
+
+# No local player found — forward to relay (remote SSH / headless)
+if [ -z "$PLAYER" ]; then
   curl -s --connect-timeout 1 "http://127.0.0.1:${SOUND_PORT}/${EVENT}" &>/dev/null &
   exit 0
 fi
@@ -112,7 +138,33 @@ FILE="${FILES[$((RANDOM % COUNT))]}"
 
 [ -z "$FILE" ] && exit 0
 
-# Play with volume control
-VOL=$(printf '%.2f' "$(echo "$SOUND_VOLUME / 100" | bc -l)")
-afplay -v "$VOL" "$FILE" &
+# Convert path for WSL players that need Windows paths
+PLAY_FILE="$FILE"
+if [ "$IS_WSL" = true ] && [ "$PLAYER" = "ffplay.exe" -o "$PLAYER" = "powershell.exe" ]; then
+  PLAY_FILE=$(wslpath -w "$FILE" 2>/dev/null || echo "$FILE")
+fi
+
+# Play with volume control (cross-platform)
+case "$PLAYER" in
+  afplay)
+    VOL=$(printf '%.2f' "$(echo "$SOUND_VOLUME / 100" | bc -l)")
+    afplay -v "$VOL" "$FILE" &
+    ;;
+  paplay)
+    PA_VOL=$((SOUND_VOLUME * 65536 / 100))
+    paplay --volume="$PA_VOL" "$FILE" &
+    ;;
+  ffplay)
+    ffplay -nodisp -autoexit -loglevel quiet -volume "$SOUND_VOLUME" "$FILE" &
+    ;;
+  ffplay.exe)
+    ffplay.exe -nodisp -autoexit -loglevel quiet -volume "$SOUND_VOLUME" "$PLAY_FILE" &>/dev/null &
+    ;;
+  powershell.exe)
+    powershell.exe -NoProfile -Command "\$w=New-Object -ComObject WMPlayer.OCX;\$w.settings.volume=$SOUND_VOLUME;\$w.URL='${PLAY_FILE}';\$null=\$w.controls;Start-Sleep 4;\$w.close()" &>/dev/null &
+    ;;
+  aplay)
+    aplay -q "$FILE" &
+    ;;
+esac
 exit 0

@@ -61,9 +61,9 @@ The wizard will ask you to **Configure**, **Update**, or **Remove**:
 
 ### Requirements
 
-- **macOS** (uses `afplay` for audio playback)
 - **Claude Code** with plugin support
-- **Python 3** (for reading config — ships with macOS)
+- **Python 3** (for reading config — ships with macOS/Linux)
+- Audio player: `afplay` (macOS), `paplay` / `ffplay` / `aplay` (Linux), or PowerShell (Windows)
 
 ---
 
@@ -164,11 +164,62 @@ Empty arrays `[]` are fine — that event just won't play a sound for your theme
 
 ---
 
+## Cross-Platform Support
+
+| Platform | Setup | How it works |
+|----------|-------|-------------|
+| **macOS** | Just install | Plays via `afplay` directly |
+| **Linux desktop** | Just install | Auto-detects `paplay` / `ffplay` / `aplay` |
+| **Windows (WSL)** | Just install | Auto-detects `powershell.exe` or `ffplay.exe` via WSL interop |
+| **Remote SSH** | Start relay + SSH port forward | See below |
+
+### Remote SSH setup
+
+When running Claude Code on a remote server (headless, no audio hardware), sounds need to be forwarded to your local machine:
+
+```bash
+# On your LOCAL machine — start the relay
+python3 scripts/relay.py
+
+# SSH with port forwarding
+ssh -R 19876:127.0.0.1:19876 your-server
+```
+
+Relay commands:
+
+```bash
+python3 scripts/relay.py           # Start (foreground)
+python3 scripts/relay.py &         # Start (background)
+python3 scripts/relay.py --status  # Show config and loaded themes
+python3 scripts/relay.py --kill    # Stop
+```
+
+### Opencode
+
+Sound FX is also available as an [Opencode](https://opencode.ai) plugin:
+
+```bash
+npm install @6m1w/opencode-sound-fx
+```
+
+Add to `opencode.json`:
+
+```json
+{
+  "plugin": ["@6m1w/opencode-sound-fx"]
+}
+```
+
+Shares the same config file (`~/.claude/sound-fx.local.json`) and audio themes.
+
+---
+
 ## Environment Variables
 
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `CLAUDE_SOUND_VOLUME` | `60` | Volume level (0–100) |
+| `CLAUDE_SOUND_PORT` | `19876` | Relay server port |
 
 ---
 
