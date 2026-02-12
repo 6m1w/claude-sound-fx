@@ -58,7 +58,7 @@ Available themes (12 total):
      - label: "Mix", description: "All 12 themes randomly mixed for maximum variety"
      - label: "Disable All Sounds", description: "Turn off all sound effects"
 
-6. **If user chose "Disable All Sounds"**: Write config and skip to step 10:
+6. **If user chose "Disable All Sounds"**: Write config and skip to step 12:
    ```json
    {"enabled": false}
    ```
@@ -106,7 +106,32 @@ Available themes (12 total):
    - "JoJo" → "jojo", "One Piece" → "onepiece", "Pikachu" → "pikachu", "Doraemon" → "doraemon"
    - "WoW Peon" → "peon", "StarCraft SCV" → "scv", "Steve Jobs" → "jobs", "Mechanical Keyboard" → "keyboard"
 
-9. **Ask Trigger Mode** (for both Mix and Single Theme):
+9. **Preview the selected theme** — play a random sound from the chosen theme so the user can hear it before committing:
+   - Tell the user: "Playing a preview of [Theme Display Name]..."
+   - Play a random sound file from the theme's manifest:
+     ```bash
+     FILE=$(python3 -c "
+     import json, random, os
+     base = os.path.join('${CLAUDE_PLUGIN_ROOT}', 'assets', '<directory_name>')
+     m = json.load(open(os.path.join(base, 'manifest.json')))
+     files = [f for v in m.values() if isinstance(v, list) for f in v]
+     print(os.path.join(base, random.choice(files)))
+     ") && afplay "$FILE" &
+     ```
+     (Replace `<directory_name>` with the mapped directory name from step 8)
+
+10. **Ask confirmation** using AskUserQuestion:
+   - header: "Confirm"
+   - question: "How does [Theme Display Name] sound?"
+   - multiSelect: false
+   - options:
+     - label: "Keep it", description: "Use this theme and continue setup"
+     - label: "Try another", description: "Go back and pick a different theme"
+
+   If the user chose "Try another": **go back to step 7** and repeat the theme group → theme → preview → confirm loop.
+   If the user chose "Keep it": continue to step 11.
+
+11. **Ask Trigger Mode** (for both Mix and Single Theme):
    - header: "Trigger"
    - question: "How often should sounds play?"
    - multiSelect: false
@@ -116,7 +141,7 @@ Available themes (12 total):
 
    Map: "Full" → "full", "Minimal" → "minimal"
 
-10. **Write the config** to `~/.claude/sound-fx.local.json`:
+12. **Write the config** to `~/.claude/sound-fx.local.json`:
 
    For Mix mode:
    ```json
@@ -133,12 +158,12 @@ Available themes (12 total):
    {"enabled": false}
    ```
 
-11. **Confirm** the setup is complete. Show a summary:
+13. **Confirm** the setup is complete. Show a summary:
    - Mode: Mix / Single (theme name) / Disabled
    - Trigger: Full / Minimal (if applicable)
    - Tell the user they can re-run `/sound-fx:setup` anytime to change settings.
 
-12. **Play a test sound** (skip if Disabled):
+14. **Play a test sound** (skip if Disabled):
    ```bash
    bash ${CLAUDE_PLUGIN_ROOT}/hooks/hook.sh start
    ```
