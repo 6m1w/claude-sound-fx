@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Sound FX — Themed sound effects for Claude Code" src="./docs/header.svg" width="600">
+  <img alt="Sound FX — Themed sound effects for Claude Code" src="./docs/header.svg" width="700">
 </p>
 
 <p align="center">
