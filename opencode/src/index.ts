@@ -31,7 +31,7 @@ const CONFIG_PATHS = [
     "sound-fx.json",
   ),
 ]
-const MINIMAL_EVENTS = new Set(["start", "complete", "error", "notification"])
+const MINIMAL_EVENTS = new Set(["start", "complete", "notification"])
 const DEFAULT_VOLUME = parseInt(process.env.CLAUDE_SOUND_VOLUME || "60", 10)
 
 // ---------------------------------------------------------------------------
